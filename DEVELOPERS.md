@@ -2,6 +2,8 @@
 
 This guide outlines the setup process for our development environment, focusing on packaging and dependency management.
 ## Info on dev setup
+### Commit practices (pre-commit)
+we use [pre-commit ](https://pre-commit.com/)to run RUFF. 
 ### Poetry for Packaging and Dependency Management
 
 We use [Poetry](https://python-poetry.org/docs/main/#installation) as our primary tool for packaging and managing dependencies. Poetry provides a simple yet powerful way to manage project dependencies and publish packages.
