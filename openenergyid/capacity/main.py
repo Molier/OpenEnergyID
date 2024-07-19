@@ -71,10 +71,7 @@ class CapacityAnalysis:
         peaks = []
 
         for i in range(len(series) - 1):
-            if (
-                series.iloc[i] > series.iloc[i - 1]
-                and series.iloc[i] > series.iloc[i + 1]
-            ):
+            if series.iloc[i] > series.iloc[i - 1] and series.iloc[i] > series.iloc[i + 1]:
                 peaks.append((series.index[i], series.iloc[i]))
 
         peaks.sort(key=lambda x: x[1], reverse=True)
@@ -103,29 +100,28 @@ class CapacityAnalysis:
         peaks = self.find_peaks()
         return {
             "peak_moments": [
-                {"peak_time": peak[0].isoformat(), "peak_value": float(peak[1])}
-                for peak in peaks
+                {"peak_time": peak[0].isoformat(), "peak_value": float(peak[1])} for peak in peaks
             ]
         }
 
 
-# Usage example
-if __name__ == "__main__":
-    # Load data from JSON file
-    with open("data/capacity/electricity_delivered_sample.json", "r") as f:
-        input_data = CapacityInput.model_validate_json(f.read())
+# # Usage example
+# if __name__ == "__main__":
+#     # Load data from JSON file
+#     with open("data/capacity/electricity_delivered_sample.json", "r") as f:
+#         input_data = CapacityInput.model_validate_json(f.read())
 
-    # Create CapacityAnalysis instance
-    analyzer = CapacityAnalysis(
-        data=input_data,
-        num_peaks=24,  # Get 24 peaks as per your requirement
-        threshold=2.5,
-        window="MS",  # Month Start
-    )
+#     # Create CapacityAnalysis instance
+#     analyzer = CapacityAnalysis(
+#         data=input_data,
+#         num_peaks=24,  # Get 24 peaks as per your requirement
+#         threshold=2.5,
+#         window="MS",  # Month Start
+#     )
 
-    results = analyzer.run_analysis()
+#     results = analyzer.run_analysis()
 
-    # Print results
-    print("Peak Moments:")
-    for peak in results["peak_moments"]:
-        print(f"Time: {peak['peak_time']}, Value: {peak['peak_value']}")
+#     # Print results
+#     print("Peak Moments:")
+#     for peak in results["peak_moments"]:
+#         print(f"Time: {peak['peak_time']}, Value: {peak['peak_value']}")
